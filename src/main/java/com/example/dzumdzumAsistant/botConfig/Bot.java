@@ -72,7 +72,6 @@ public class Bot extends TelegramLongPollingBot {
                     putInfo.getHeroes(Integer.parseInt(messageText));
                 }
 
-
             }
 
         }
