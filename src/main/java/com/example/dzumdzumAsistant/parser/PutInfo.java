@@ -14,6 +14,8 @@ import java.util.List;
 public class PutInfo {
     private final Gson gson = new Gson();
 
+    RestTemplate restTemplate = new RestTemplate();
+
     private final HeroService heroService;
 
     @Autowired
@@ -22,7 +24,6 @@ public class PutInfo {
     }
 
     public void getHeroes(int id) {
-        RestTemplate restTemplate = new RestTemplate();
         List s = restTemplate.getForObject(String.format("https://api.opendota.com/api/heroes/%s/matchups", id), List.class);
 
 
