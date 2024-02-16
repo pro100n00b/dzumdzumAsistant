@@ -21,7 +21,5 @@ public class HeroForJson {
     private double games_played;
 
 
-    private String localized_name;
-
 
 }

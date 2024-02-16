@@ -19,8 +19,7 @@ public class Hero {
     @Column
     private double procentWin;
 
-    @Column
-    private String localized_name;
+
 
 
     public Hero(Long hero_id, double procentWin) {
@@ -32,13 +31,13 @@ public class Hero {
 
     }
 
-    public Hero( String localized_name, Long hero_id) {
-        this.localized_name = localized_name;
+    public Hero( Long hero_id) {
+
         this.hero_id = hero_id;
     }
 
     @Override
     public String toString() {
-        return hero_id + " " + procentWin + "\n";
+        return hero_id + " " + (int)procentWin + "%" +"\n";
     }
 }
