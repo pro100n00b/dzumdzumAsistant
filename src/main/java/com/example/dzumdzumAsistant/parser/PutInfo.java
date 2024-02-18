@@ -27,8 +27,8 @@ public class PutInfo {
 
     public void getHeroes() {
 
+        for(int id = 1; id < 123; id++) {
 
-        for (int id = 1; id < 123; id++) {
 
             List s = restTemplate.getForObject(String.format("https://api.opendota.com/api/heroes/%s/matchups", id), List.class);
 
@@ -46,6 +46,7 @@ public class PutInfo {
 
             }
         }
+
 
     }
 }

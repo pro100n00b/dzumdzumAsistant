@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 
-
 @Service
 public class HeroServiceImpl implements HeroService {
 
 
-    private HeroRepository heroRepository;
+    private final HeroRepository heroRepository;
 
     @Autowired
     public HeroServiceImpl(HeroRepository heroRepository) {
@@ -27,7 +26,8 @@ public class HeroServiceImpl implements HeroService {
         heroRepository.save(hero);
     }
 
-   public List<HeroStat> topHero() {
+    public List<HeroStat> topHero(){
         return heroRepository.topHero();
-   }
+    }
+
 }

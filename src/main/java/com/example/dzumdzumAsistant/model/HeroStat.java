@@ -1,12 +1,8 @@
 package com.example.dzumdzumAsistant.model;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.Date;
 
 @Entity
@@ -16,6 +12,10 @@ public class HeroStat {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
     private  int hero_id;
 
     @Column
@@ -44,10 +44,11 @@ public class HeroStat {
 
     }
 
-    public HeroStat (int hero_id, int wins, int games_played) {
+    public HeroStat (int hero_id, int wins, int games_played, int hero_enemy_id) {
         this.hero_id = hero_id;
         this.wins = wins;
         this.games_played = games_played;
+        this.hero_enemy_id = hero_enemy_id;
     }
 
     @Override
