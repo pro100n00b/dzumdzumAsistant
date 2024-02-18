@@ -1,6 +1,6 @@
 package com.example.dzumdzumAsistant.repository;
 
-import com.example.dzumdzumAsistant.model.Hero;
+import com.example.dzumdzumAsistant.model.HeroStat;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface HeroRepository extends JpaRepository<Hero, Integer> {
+public interface HeroRepository extends JpaRepository<HeroStat, Integer> {
 
-    @Query("SELECT new Hero(hero_id, procentWin) from Hero ORDER BY procentWin DESC LIMIT 5")
-    public List<Hero> topHero();
+    @Query("SELECT  new HeroStat(hero_id, wins , games_played) from HeroStat ORDER BY games_played DESC LIMIT 5")
+    public List<HeroStat> topHero();
 
 
 }

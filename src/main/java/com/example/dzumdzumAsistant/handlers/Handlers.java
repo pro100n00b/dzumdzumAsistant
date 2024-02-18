@@ -1,6 +1,6 @@
 package com.example.dzumdzumAsistant.handlers;
 
-import com.example.dzumdzumAsistant.model.Hero;
+import com.example.dzumdzumAsistant.model.HeroStat;
 import com.example.dzumdzumAsistant.service.HeroServiceImpl;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class Handlers {
     public String getTop() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        for (Hero x :
+        for (HeroStat x :
                 heroService.topHero()) {
             stringBuilder.append(x)
                     .append("\n");

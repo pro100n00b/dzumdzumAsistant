@@ -9,16 +9,16 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties
-public class HeroForJson {
+public class HeroDto {
 
 
-    private Long hero_id;
+    private int hero_id;
 
 
-    private double wins;
+    private int wins;
 
 
-    private double games_played;
+    private int games_played;
 
 
 

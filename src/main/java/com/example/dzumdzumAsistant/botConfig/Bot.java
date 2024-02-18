@@ -16,10 +16,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class Bot extends TelegramLongPollingBot {
 
 
-    private HeroServiceImpl heroService;
+    private final HeroServiceImpl heroService;
 
-    private Handlers handlers;
-    private PutInfo putInfo;
+    private final Handlers handlers;
+    private final PutInfo putInfo;
     private final DeleteMessage deleteMessage = new DeleteMessage();
 
 
@@ -69,7 +69,7 @@ public class Bot extends TelegramLongPollingBot {
                             handlers.getTop());
                 }
                 case null, default -> {
-                    putInfo.getHeroes(Integer.parseInt(messageText));
+                    putInfo.getHeroes();
                 }
 
             }

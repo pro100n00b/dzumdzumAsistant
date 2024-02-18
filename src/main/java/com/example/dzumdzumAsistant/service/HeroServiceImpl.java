@@ -2,7 +2,7 @@ package com.example.dzumdzumAsistant.service;
 
 
 
-import com.example.dzumdzumAsistant.model.Hero;
+import com.example.dzumdzumAsistant.model.HeroStat;
 import com.example.dzumdzumAsistant.repository.HeroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +23,11 @@ public class HeroServiceImpl implements HeroService {
     }
 
     @Override
-    public void saveHero(Hero hero) {
+    public void saveHero(HeroStat hero) {
         heroRepository.save(hero);
     }
 
-   public List<Hero> topHero() {
+   public List<HeroStat> topHero() {
         return heroRepository.topHero();
    }
 }

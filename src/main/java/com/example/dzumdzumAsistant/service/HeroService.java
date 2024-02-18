@@ -1,13 +1,11 @@
 package com.example.dzumdzumAsistant.service;
 
-import com.example.dzumdzumAsistant.model.Hero;
-import com.example.dzumdzumAsistant.model.HeroForJson;
-
-import java.util.Optional;
+import com.example.dzumdzumAsistant.model.HeroStat;
 
 public interface HeroService {
 
-    void saveHero(Hero hero);
+
+    void saveHero(HeroStat hero);
 
 
 }
