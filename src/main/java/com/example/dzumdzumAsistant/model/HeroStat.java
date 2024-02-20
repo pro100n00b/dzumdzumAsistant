@@ -3,6 +3,7 @@ package com.example.dzumdzumAsistant.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.time.LocalDate;
 
 
 
@@ -37,10 +38,17 @@ public class HeroStat {
 
     }
 
-    @Override
-    public String toString() {
-        return wins + " " + games_played;
+    public HeroStat(int hero_id , int hero_enemy_id, LocalDate value_date , int wins, int games_played) {
+        this.wins = wins;
+        this.games_played = games_played;
+        this.pk = new HeroStatPK(hero_id, hero_enemy_id, value_date);
     }
 
+    @Override
+    public String toString() {
+
+        return pk.getHero_id() + " " + pk.getHero_enemy_id() + " " + String.format( "%.2f",((double)wins / (double) games_played)* 100) + "%";
+
+    }
 
 }

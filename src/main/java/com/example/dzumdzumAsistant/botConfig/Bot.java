@@ -66,10 +66,10 @@ public class Bot extends TelegramLongPollingBot {
                 case "top" -> {
                     sendMessage(chatId,
 
-                            "handlers.getTop()");
+                            handlers.getTop());
                 }
                 case null, default -> {
-                    putInfo.getHeroes();
+                    ;
                 }
 
             }

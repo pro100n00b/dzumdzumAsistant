@@ -6,51 +6,87 @@ import com.example.dzumdzumAsistant.model.HeroStatPK;
 import com.example.dzumdzumAsistant.service.HeroService;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+
 
 @Component
 public class PutInfo {
     private final Gson gson = new Gson();
 
-    RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate = new RestTemplate();
+
 
     private final HeroService heroService;
+
 
     @Autowired
     public PutInfo(HeroService heroService) {
         this.heroService = heroService;
     }
 
-    public void getHeroes() {
 
+    @Scheduled(fixedRate = 21600000)
+    private void getHeroesStatFirstStep() {
 
-        for (int id = 1; id < 123; id++) {
-
-
-            List s = restTemplate.getForObject(String.format("https://api.opendota.com/api/heroes/%s/matchups", id), List.class);
-
-
-            Date date = new java.util.Date();
-
-
+        for (int id = 1; id < 41; id++) {
             for (Object x :
-                    s) {
+                    getJson(id)) {
 
                 HeroDto heroDto = gson.fromJson(String.valueOf(x), HeroDto.class);
 
                 heroService.saveHero(new HeroStat(heroDto.getWins(), heroDto.getGames_played(),
-                        new HeroStatPK(id, heroDto.getHero_id(), date)));
+                        new HeroStatPK(1, heroDto.getHero_id(), getDate())));
+            }
+        }
+    }
+
+    @Scheduled(fixedRate = 21660000 , initialDelay = 60000)
+    public void getHeroesStatSecondStep() {
+
+
+        for (int id = 41; id < 82; id++) {
+            for (Object x :
+                    getJson(id)) {
+
+                HeroDto heroDto = gson.fromJson(String.valueOf(x), HeroDto.class);
+
+                heroService.saveHero(new HeroStat(heroDto.getWins(), heroDto.getGames_played(),
+                        new HeroStatPK(id, heroDto.getHero_id(), getDate())));
 
 
             }
         }
 
+
+    }
+
+    @Scheduled(fixedRate = 21720000,  initialDelay = 120000)
+    public void getHeroesStatThirdsStep() {
+
+
+        for (int id = 82; id < 123; id++) {
+            for (Object x :
+                    getJson(id)) {
+
+                HeroDto heroDto = gson.fromJson(String.valueOf(x), HeroDto.class);
+
+                heroService.saveHero(new HeroStat(heroDto.getWins(), heroDto.getGames_played(),
+                        new HeroStatPK(id, heroDto.getHero_id(), getDate())));
+            }
+        }
+    }
+
+    public List getJson(int id) {
+        return restTemplate.getForObject(String.format("https://api.opendota.com/api/heroes/%s/matchups", id), List.class);
+    }
+
+    public LocalDate getDate() {
+        return LocalDate.now();
 
     }
 }
