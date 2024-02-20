@@ -26,8 +26,8 @@ public class HeroServiceImpl implements HeroService {
         heroRepository.save(hero);
     }
 
-    public List<HeroStat> topHero(){
-        return heroRepository.topHero();
+    public List<String> topHero(int id){
+        return heroRepository.topHero(id);
     }
 
 }
