@@ -15,6 +15,6 @@ import java.util.List;
 public interface HeroRepository extends JpaRepository<HeroStat, Integer> {
 
     @Query("SELECT  new HeroStat (pk.hero_id, pk.hero_enemy_id, pk.value_date, wins, games_played) FROM  HeroStat ORDER BY games_played DESC LIMIT 5")
-    public List<HeroStat> topHero();
+    List<HeroStat> topHero();
 
 }

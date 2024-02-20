@@ -1,8 +1,6 @@
 package com.example.dzumdzumAsistant.botConfig;
 
 import com.example.dzumdzumAsistant.handlers.Handlers;
-import com.example.dzumdzumAsistant.parser.PutInfo;
-import com.example.dzumdzumAsistant.service.HeroServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -15,18 +13,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class Bot extends TelegramLongPollingBot {
 
-
-    private final HeroServiceImpl heroService;
-
     private final Handlers handlers;
-    private final PutInfo putInfo;
     private final DeleteMessage deleteMessage = new DeleteMessage();
 
 
     @Autowired
-    public Bot(HeroServiceImpl heroService, PutInfo putInfo, Handlers handlers) {
-        this.heroService = heroService;
-        this.putInfo = putInfo;
+    public Bot(Handlers handlers) {
         this.handlers = handlers;
     }
 
@@ -63,17 +55,13 @@ public class Bot extends TelegramLongPollingBot {
                         "Привет! Я помогу узнать винрейт твоего говна-героя"
                 );
 
-                case "top" -> {
-                    sendMessage(chatId,
+                case "top" -> sendMessage(chatId,
+                        handlers.getTop());
 
-                            handlers.getTop());
-                }
                 case null, default -> {
-                    ;
+
                 }
-
             }
-
         }
     }
 
@@ -83,11 +71,10 @@ public class Bot extends TelegramLongPollingBot {
         sendMessage.setChatId(chatId);
         try {
             executeAsync(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
+        } catch (TelegramApiException ignored) {
+
         }
     }
-
 }
 
 
