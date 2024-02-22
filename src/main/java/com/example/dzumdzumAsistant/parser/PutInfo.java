@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class PutInfo {
     }
 
 
-    @Scheduled(fixedRate = 21600000)
+    @Scheduled(fixedRate = 21600000 )
     private void getHeroesStatFirstStep() {
 
         for (int id = 1; id < 41; id++) {
@@ -40,12 +39,12 @@ public class PutInfo {
                 HeroDto heroDto = gson.fromJson(String.valueOf(x), HeroDto.class);
 
                 heroService.saveHero(new HeroStat(heroDto.getWins(), heroDto.getGames_played(),
-                        new HeroStatPK(1, heroDto.getHero_id(), getDate())));
+                        new HeroStatPK(id, heroDto.getHero_id(), getDate())));
             }
         }
     }
 
-    @Scheduled(fixedRate = 21660000 , initialDelay = 60000)
+    @Scheduled(fixedRate = 21720000 , initialDelay = 120000)
     public void getHeroesStatSecondStep() {
 
 
@@ -65,11 +64,11 @@ public class PutInfo {
 
     }
 
-    @Scheduled(fixedRate = 21720000,  initialDelay = 120000)
+    @Scheduled(fixedRate = 21840000,  initialDelay = 240000)
     public void getHeroesStatThirdsStep() {
 
 
-        for (int id = 82; id < 123; id++) {
+        for (int id = 82; id < 124; id++) {
             for (Object x :
                     getJson(id)) {
 
